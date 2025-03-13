@@ -16,7 +16,7 @@
 // 
 // This example requires only an ESP32 and download cable. No other hardware is reuired.
 // A wifi SSID and password is required.
-// Written by: Subhan Iqbal  12/8/24
+// Written by: Subhan Iqbal  12/03/25
 //
 #include <WiFi.h>
 #include <WiFiClient.h>
@@ -24,8 +24,8 @@
 #include <ESPmDNS.h>
 #include "homepage.h"
 
-const char* ssid = "Subhan's S24 Ultra";
-const char* password = "12345678";
+const char* ssid = "************";
+const char* password = "**************";
 
 WebServer server(80);
 
