@@ -22,6 +22,7 @@ void setup() {
   Grippers.attach(22); // Assign GPIO 22 for controlling the Grippers servo
 
   // No need for pinMode on analog pins, ESP32 reads analog directly
+
 }
 
 void loop() {
