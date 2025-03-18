@@ -3,11 +3,11 @@
 //
 // It hosts a webpage which has one temperature reading to display.
 // The webpage is always the same apart from the reading which would change.
-// The getTemp() function simulates getting a temperature reading.
+// The getAngle() function simulates getting a temperature reading.
 // homePage.h contains 2 constant string literals which is the two parts of the
 // webpage that never change.
 // handleRoot() builds up the webpage by adding as a C++ String:
-// homePagePart1 + getTemp() +homePagePart2 
+// homePagePart1 + getAngle() 
 // It then serves the webpage with the command:  
 // server.send(200, "text/html", message);
 // Note the text is served as html.
@@ -24,19 +24,19 @@
 #include <ESPmDNS.h>
 #include "homepage.h"
 
-const char* ssid = "Subhan's S24 Ultra";
-const char* password = "12345678";
+const char* ssid = "************";
+const char* password = "*********";
 
 WebServer server(80);
 
 //temp function to simulate temp sensor
-String getTemp() {
+String getAngle() {
   return "25.4";
 }
 
 
 void handleRoot() {
-  String message = homePagePart1 + getTemp();
+  String message = homePagePart1 + getAngle();
   server.send(200, "text/html", message);
 }
 
