@@ -29,6 +29,7 @@ String homePagePart1 = F(R"=====(<!DOCTYPE html>
 .slidecontainer {
     width: 100%;
     margin-bottom: 20px; /* Space between sliders */
+    color: white;
   }
 .slider {
     -webkit-appearance: none;
@@ -74,33 +75,33 @@ String homePagePart1 = F(R"=====(<!DOCTYPE html>
 <!-- Waist Control -->
 <div class="slidecontainer">
   <label for="waist">Waist:</label>
-  <input type="range" min="1" max="90" value="45" class="slider" id="waist">
+  <input type="range" min="1" max="90" value="45" class="slider" id="waist" data-endpoint="/waist">
   <p style="color: azure;">Value: <span id="waist-value">45</span></p>
 </div>
 
 <!-- Shoulder Control -->
 <div class="slidecontainer">
   <label for="shoulder">Shoulder:</label>
-  <input type="range" min="1" max="20" value="10" class="slider" id="shoulder">
+  <input type="range" min="1" max="20" value="10" class="slider" id="shoulder" data-endpoint="/shoulder">
   <p style="color: azure;">Value: <span id="shoulder-value">10</span></p>
 </div>
 
 <!-- Elbow Control -->
 <div class="slidecontainer">
   <label for="elbow">Elbow:</label>
-  <input type="range" min="1" max="50" value="25" class="slider" id="elbow">
+  <input type="range" min="1" max="50" value="25" class="slider" id="elbow" data-endpoint="/elbow">
   <p style="color: azure;">Value: <span id="elbow-value">50</span></p>
 </div>
 
 <!-- Gripper Control -->
 <div class="slidecontainer">
   <label for="gripper">Gripper:</label>
-  <input type="range" min="1" max="100" value="50" class="slider" id="gripper">
+  <input type="range" min="1" max="100" value="50" class="slider" id="gripper" data-endpoint="/gripper">
   <p style="color: azure;">Value: <span id="gripper-value">50</span></p>
 </div>
 
 <script>
-  function updateSliderValue(sliderId, valueId) {
+  function slide(sliderId, valueId) {
     var slider = document.getElementById(sliderId);
     var output = document.getElementById(valueId);
     output.innerHTML = slider.value;
@@ -111,39 +112,40 @@ String homePagePart1 = F(R"=====(<!DOCTYPE html>
   }
   
   
-  updateSliderValue("waist", "waist-value");
-  updateSliderValue("shoulder", "shoulder-value");
-  updateSliderValue("elbow", "elbow-value");
-  updateSliderValue("gripper", "gripper-value");
+  slide("waist", "waist-value");
+  slide("shoulder", "shoulder-value");
+  slide("elbow", "elbow-value");
+  slide("gripper", "gripper-value");
 
 
-  //Function to fetch the temperature from the server
-  function updateAngle (){
-    fetch('http://127.0.0.1:5500/webpage.html')
-    .then(response => response.json()) //Parse JSON response
-    .then(data => {
-      document.getElementById("Angle").innerText = data.temperature + "degrees";
-    })
-    .catch(error => {
-      console.error("Error fetching temperature:",error);
-    });
-  }
+  
 
-  // update the Angle every 2 seconds
-  setInterval(updateAngle, 2000);
+function sendRequest(url) {
+  fetch(url)
+      .catch(error => console.log(error));
+}
 
-  // Call updateAngle initially to display the value right away
-  window.onload = updateAngle;
+function sendSliderData(endpoint, value) {
+  fetch(`${endpoint}?value=${value}`)
+      .catch(error => console.log(error));
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".slider").forEach(slider => {
+      slider.addEventListener("input", function () {
+          sendSliderData(this.dataset.endpoint, this.value);
+      });
+  });
+});
 </script>
 
 <video width="670" controls>
   <source src="Robovid.mp4" type="video/mp4">
   <source src="www.fanuc.eu" type="video/ogg">
-  Your browser does not support HTML video.
 </video>
 
 <p style="color: azure;">
-  Video courtesy of 
+  Advetisement video 
   <a href="https://www.fanuc.eu/" target="_blank">Robotic arm</a>.
   </p>
 <script src="program.js"></script>
