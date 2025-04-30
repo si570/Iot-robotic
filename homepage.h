@@ -2,7 +2,9 @@
 // F(R"=====( HTML code here )=====");
 // If you have 1 reading then you probably have 2 literal strings
 
+
 String homePagePart1 = F(R"=====(<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -150,5 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </p>
 <script src="program.js"></script>
 </body>
+</html>
 </html>)=====");
+
 
