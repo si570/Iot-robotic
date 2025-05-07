@@ -12,7 +12,7 @@
 #include <ESP32Servo.h>   //  ESP32 Servo library
 
 const char* ssid = "Subhan's S24 Ultra";
-const char* password = "12345678";
+const char* password = "*********";
 Servo Waist;       // Declare variable to control Waist Servo
 Servo Shoulder;    // Declare variable to control Shoulder Servo
 Servo Elbow;       // Declare variable to control Elbow Servo
